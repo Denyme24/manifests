@@ -46,10 +46,10 @@ This should only apply to “stable” components, as “alpha/beta” component
 
 The Kubeflow Manifests repository is organized under three main directories, which include manifests for installing:
 
-| Directory | Purpose |
-| - | - |
-| `applications` | Kubeflow's official components, maintained by the respective Kubeflow WGs |
-| `common` | Common services, maintained by the Manifests WG |
+| Directory      | Purpose                                                                                            |
+| -------------- | -------------------------------------------------------------------------------------------------- |
+| `applications` | Kubeflow's official components, maintained by the respective Kubeflow WGs                          |
+| `common`       | Common services, maintained by the Manifests WG                                                    |
 | `experimental` | Third-party integrations and platform experiments (e.g., Ray, SeaweedFS, or security improvements) |
 
 All components are deployable with `kustomize`. You can choose to deploy the entire Kubeflow platform or individual components.
@@ -60,33 +60,31 @@ All components are deployable with `kustomize`. You can choose to deploy the ent
 
 This repository periodically synchronizes all official Kubeflow components from the respective upstream repositories. The following matrix shows the git version included for each component along with the resource requirements for each Kubeflow component, calculated as the maximum of actual usage and configured requests for CPU/memory as well as storage requirements from PVCs:
 
-| Component | Local Manifests Path | Upstream Revision | CPU (millicores) | Memory (Mi) |  PVC Storage (GB) |
-| - | - | - | - | - | - |
-| Training Operator | applications/training-operator/upstream | [v1.9.2](https://github.com/kubeflow/training-operator/tree/v1.9.2/manifests) | 3m | 25Mi | 0GB |
-| Trainer | applications/trainer/upstream | [v2.1.0](https://github.com/kubeflow/trainer/tree/v2.1.0/manifests) | 8m | 143Mi | 0GB |
-| Notebook Controller | applications/jupyter/notebook-controller/upstream | [v1.10.0](https://github.com/kubeflow/kubeflow/tree/v1.10.0/components/notebook-controller/config) | 5m | 93Mi | 0GB |
-| PVC Viewer Controller | applications/pvcviewer-controller/upstream | [v1.10.0](https://github.com/kubeflow/kubeflow/tree/v1.10.0/components/pvcviewer-controller/config) | 15m | 128Mi | 0GB |
-| Tensorboard Controller | applications/tensorboard/tensorboard-controller/upstream | [v1.10.0](https://github.com/kubeflow/kubeflow/tree/v1.10.0/components/tensorboard-controller/config) | 15m | 128Mi | 0GB |
-| Central Dashboard | applications/centraldashboard/upstream | [v1.10.0](https://github.com/kubeflow/kubeflow/tree/v1.10.0/components/centraldashboard/manifests) | 2m | 159Mi | 0GB |
-| Profiles + KFAM | applications/profiles/upstream | [v1.10.0](https://github.com/kubeflow/kubeflow/tree/v1.10.0/components/profile-controller/config) | 7m | 129Mi | 0GB |
-| PodDefaults Webhook | applications/admission-webhook/upstream | [v1.10.0](https://github.com/kubeflow/kubeflow/tree/v1.10.0/components/admission-webhook/manifests) | 1m | 14Mi | 0GB |
-| Jupyter Web Application | applications/jupyter/jupyter-web-app/upstream | [v1.10.0](https://github.com/kubeflow/kubeflow/tree/v1.10.0/components/crud-web-apps/jupyter/manifests) | 4m | 231Mi | 0GB |
-| Tensorboards Web Application | applications/tensorboard/tensorboards-web-app/upstream | [v1.10.0](https://github.com/kubeflow/kubeflow/tree/v1.10.0/components/crud-web-apps/tensorboards/manifests) |  |  |  |
-| Volumes Web Application | applications/volumes-web-app/upstream | [v1.10.0](https://github.com/kubeflow/kubeflow/tree/v1.10.0/components/crud-web-apps/volumes/manifests) | 4m | 226Mi | 0GB |
-| Katib | applications/katib/upstream | [v0.19.0](https://github.com/kubeflow/katib/tree/v0.19.0/manifests/v1beta1) | 13m | 476Mi | 10GB |
-| KServe | applications/kserve/kserve | [v0.15.2](https://github.com/kserve/kserve/releases/tag/v0.15.2/install/v0.15.2) | 600m | 1200Mi | 0GB |
-| KServe Models Web Application | applications/kserve/models-web-app | [v0.15.0](https://github.com/kserve/models-web-app/tree/v0.15.0/config) | 6m | 259Mi  | 0GB |
-| Kubeflow Pipelines | applications/pipeline/upstream | [2.15.0](https://github.com/kubeflow/pipelines/tree/2.15.0/manifests/kustomize) | 970m | 3552Mi | 35GB |
-| Kubeflow Model Registry | applications/model-registry/upstream | [v0.3.4](https://github.com/kubeflow/model-registry/tree/v0.3.4/manifests/kustomize) | 510m | 2112Mi | 20GB |
-| Spark Operator	|	applications/spark/spark-operator	|	[2.4.0](https://github.com/kubeflow/spark-operator/tree/v2.4.0) | 9m | 41Mi | 0GB |
-| Istio | common/istio | [1.28.0](https://github.com/istio/istio/releases/tag/1.28.0) | 750m | 2364Mi | 0GB |
-| Knative | common/knative/knative-serving <br /> common/knative/knative-eventing | [v1.20.0](https://github.com/knative/serving/releases/tag/knative-v1.20.0) <br /> [v1.20.0](https://github.com/knative/eventing/releases/tag/knative-v1.20.0) | 1450m | 1038Mi | 0GB |
-| Cert Manager | common/cert-manager | [1.16.1](https://github.com/cert-manager/cert-manager/releases/tag/v1.16.1) | 3m | 128Mi | 0GB |
-| Dex | common/dex | [2.43.1](https://github.com/dexidp/dex/releases/tag/v2.43.1) | 3m | 27Mi | 0GB |
-| OAuth2-Proxy | common/oauth2-proxy | [7.10.0](https://github.com/oauth2-proxy/oauth2-proxy/releases/tag/v7.10.0) | 3m | 27Mi | 0GB |
-| **Total** | | | **4380m** | **12341Mi** | **65GB** |
-
-
+| Component                     | Local Manifests Path                                                  | Upstream Revision                                                                                                                                             | CPU (millicores) | Memory (Mi) | PVC Storage (GB) |
+| ----------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ----------- | ---------------- |
+| Training Operator             | applications/training-operator/upstream                               | [v1.9.2](https://github.com/kubeflow/training-operator/tree/v1.9.2/manifests)                                                                                 | 3m               | 25Mi        | 0GB              |
+| Trainer                       | applications/trainer/upstream                                         | [v2.1.0](https://github.com/kubeflow/trainer/tree/v2.1.0/manifests)                                                                                           | 8m               | 143Mi       | 0GB              |
+| Notebook Controller           | applications/jupyter/notebook-controller/upstream                     | [v1.10.0](https://github.com/kubeflow/kubeflow/tree/v1.10.0/components/notebook-controller/config)                                                            | 5m               | 93Mi        | 0GB              |
+| PVC Viewer Controller         | applications/pvcviewer-controller/upstream                            | [v1.10.0](https://github.com/kubeflow/kubeflow/tree/v1.10.0/components/pvcviewer-controller/config)                                                           | 15m              | 128Mi       | 0GB              |
+| Tensorboard Controller        | applications/tensorboard/tensorboard-controller/upstream              | [v1.10.0](https://github.com/kubeflow/kubeflow/tree/v1.10.0/components/tensorboard-controller/config)                                                         | 15m              | 128Mi       | 0GB              |
+| Central Dashboard             | applications/centraldashboard/upstream                                | [v1.10.0](https://github.com/kubeflow/kubeflow/tree/v1.10.0/components/centraldashboard/manifests)                                                            | 2m               | 159Mi       | 0GB              |
+| Profiles + KFAM               | applications/profiles/upstream                                        | [v1.10.0](https://github.com/kubeflow/kubeflow/tree/v1.10.0/components/profile-controller/config)                                                             | 7m               | 129Mi       | 0GB              |
+| PodDefaults Webhook           | applications/admission-webhook/upstream                               | [v1.10.0](https://github.com/kubeflow/kubeflow/tree/v1.10.0/components/admission-webhook/manifests)                                                           | 1m               | 14Mi        | 0GB              |
+| Jupyter Web Application       | applications/jupyter/jupyter-web-app/upstream                         | [v1.10.0](https://github.com/kubeflow/kubeflow/tree/v1.10.0/components/crud-web-apps/jupyter/manifests)                                                       | 4m               | 231Mi       | 0GB              |
+| Tensorboards Web Application  | applications/tensorboard/tensorboards-web-app/upstream                | [v1.10.0](https://github.com/kubeflow/kubeflow/tree/v1.10.0/components/crud-web-apps/tensorboards/manifests)                                                  |                  |             |                  |
+| Volumes Web Application       | applications/volumes-web-app/upstream                                 | [v1.10.0](https://github.com/kubeflow/kubeflow/tree/v1.10.0/components/crud-web-apps/volumes/manifests)                                                       | 4m               | 226Mi       | 0GB              |
+| Katib                         | applications/katib/upstream                                           | [v0.19.0](https://github.com/kubeflow/katib/tree/v0.19.0/manifests/v1beta1)                                                                                   | 13m              | 476Mi       | 10GB             |
+| KServe                        | applications/kserve/kserve                                            | [v0.15.2](https://github.com/kserve/kserve/releases/tag/v0.15.2/install/v0.15.2)                                                                              | 600m             | 1200Mi      | 0GB              |
+| KServe Models Web Application | applications/kserve/models-web-app                                    | [v0.15.0](https://github.com/kserve/models-web-app/tree/v0.15.0/config)                                                                                       | 6m               | 259Mi       | 0GB              |
+| Kubeflow Pipelines            | applications/pipeline/upstream                                        | [2.15.0](https://github.com/kubeflow/pipelines/tree/2.15.0/manifests/kustomize)                                                                               | 970m             | 3552Mi      | 35GB             |
+| Kubeflow Model Registry       | applications/model-registry/upstream                                  | [v0.3.4](https://github.com/kubeflow/model-registry/tree/v0.3.4/manifests/kustomize)                                                                          | 510m             | 2112Mi      | 20GB             |
+| Spark Operator                | applications/spark/spark-operator                                     | [2.4.0](https://github.com/kubeflow/spark-operator/tree/v2.4.0)                                                                                               | 9m               | 41Mi        | 0GB              |
+| Istio                         | common/istio                                                          | [1.28.0](https://github.com/istio/istio/releases/tag/1.28.0)                                                                                                  | 750m             | 2364Mi      | 0GB              |
+| Knative                       | common/knative/knative-serving <br /> common/knative/knative-eventing | [v1.20.0](https://github.com/knative/serving/releases/tag/knative-v1.20.0) <br /> [v1.20.0](https://github.com/knative/eventing/releases/tag/knative-v1.20.0) | 1450m            | 1038Mi      | 0GB              |
+| Cert Manager                  | common/cert-manager                                                   | [1.16.1](https://github.com/cert-manager/cert-manager/releases/tag/v1.16.1)                                                                                   | 3m               | 128Mi       | 0GB              |
+| Dex                           | common/dex                                                            | [2.43.1](https://github.com/dexidp/dex/releases/tag/v2.43.1)                                                                                                  | 3m               | 27Mi        | 0GB              |
+| OAuth2-Proxy                  | common/oauth2-proxy                                                   | [7.10.0](https://github.com/oauth2-proxy/oauth2-proxy/releases/tag/v7.10.0)                                                                                   | 3m               | 27Mi        | 0GB              |
+| **Total**                     |                                                                       |                                                                                                                                                               | **4380m**        | **12341Mi** | **65GB**         |
 
 ## Installation
 
@@ -107,6 +105,7 @@ The `example` directory contains an example kustomization for the single command
 :warning: In both options, we use a default email (`user@example.com`) and password (`12341234`). For any production Kubeflow deployment, you should change the default password by following [the relevant section](#change-default-user-password).
 
 ### Prerequisites
+
 - This is the master branch, which targets Kubernetes version 1.34+.
 - For the specific Kubernetes version per release, consult the [release notes](https://github.com/kubeflow/manifests/releases).
 - Either our local Kind (installed below) or your own Kubernetes cluster with a default [StorageClass](https://kubernetes.io/docs/concepts/storage/storage-classes/).
@@ -114,6 +113,7 @@ The `example` directory contains an example kustomization for the single command
 - Kubectl version compatible with your Kubernetes cluster ([Version Skew Policy](https://kubernetes.io/releases/version-skew-policy/#kubectl)).
 
 ---
+
 **NOTE**
 
 `kubectl apply` commands may fail on the first try. This is inherent in how Kubernetes and `kubectl` work (e.g., CR must be created after CRD becomes ready). The solution is to simply re-run the command until it succeeds. For the single-line command, we have included a bash one-liner to retry the command.
@@ -123,16 +123,18 @@ The `example` directory contains an example kustomization for the single command
 ### Install with a Single Command
 
 #### Prerequisites
+
 - 16 GB of RAM recommended.
 - 8 CPU cores recommended.
 - `kind` version 0.27+.
 - `docker` or a more modern tool such as `podman` to run the OCI images for the Kind cluster.
 - Linux kernel subsystem changes to support many pods:
-    - `sudo sysctl fs.inotify.max_user_instances=2280`
-    - `sudo sysctl fs.inotify.max_user_watches=1255360`
+  - `sudo sysctl fs.inotify.max_user_instances=2280`
+  - `sudo sysctl fs.inotify.max_user_watches=1255360`
 - You can exclude components from the `example/kustomization.yaml` to fit Kubeflow into 4-8 GB of memory and 2-4 CPU cores.
 
 #### Create Kind Cluster
+
 ```sh
 cat <<EOF | kind create cluster --name=kubeflow --config=-
 kind: Cluster
@@ -151,12 +153,14 @@ EOF
 ```
 
 #### Save Kubeconfig
+
 ```sh
 kind get kubeconfig --name kubeflow > /tmp/kubeflow-config
 export KUBECONFIG=/tmp/kubeflow-config
 ```
 
 #### Create a Secret Based on Existing Credentials to Pull the Images
+
 ```sh
 docker login
 
@@ -185,9 +189,11 @@ If all the following commands are executed, the result is the same as in the abo
 - Enable the user or distribution owner to pick and choose only the components they need.
 
 ---
+
 **Troubleshooting Note**
 
 We have seen errors like the following when applying the kustomizations of different components:
+
 ```
 error: resource mapping not found for name: "<RESOURCE_NAME>" namespace: "<SOME_NAMESPACE>" from "STDIN": no matches for kind "<CRD_NAME>" in version "<CRD_FULL_NAME>"
 ensure CRDs are installed first
@@ -198,7 +204,6 @@ This is because a kustomization applies both a CRD and a CR very quickly, and th
 If you encounter this error, we advise re-applying the manifests of the component.
 
 ---
-
 
 #### Kubeflow Namespace
 
@@ -225,9 +230,11 @@ kubectl wait --for=jsonpath='{.subsets[0].addresses[0].targetRef.kind}'=Pod endp
 ```
 
 In case you encounter this error:
+
 ```
 Error from server (InternalError): error when creating "STDIN": Internal error occurred: failed calling webhook "webhook.cert-manager.io": failed to call webhook: Post "https://cert-manager-webhook.cert-manager.svc:443/mutate?timeout=10s": dial tcp 10.96.202.64:443: connect: connection refused
 ```
+
 This is because the webhook is not yet ready to receive requests. Wait a couple of seconds and retry applying the manifests.
 
 For more troubleshooting info, also check out <https://cert-manager.io/docs/troubleshooting/webhook/>.
@@ -290,6 +297,7 @@ kubectl wait --for=condition=Ready pod -l 'app.kubernetes.io/name=oauth2-proxy' 
 ```
 
 If and after you finish the installation with Kubernetes service account token support, you should be able to create and use the tokens:
+
 ```sh
 kubectl port-forward svc/istio-ingressgateway -n istio-system 8080:80
 TOKEN="$(kubectl -n $KF_PROFILE_NAMESPACE create token default-editor)"
@@ -387,6 +395,7 @@ kustomize build common/knative/knative-eventing/base | kubectl apply -f -
 #### Network Policies
 
 Install network policies:
+
 ```sh
 kustomize build common/networkpolicies/base | kubectl apply -f -
 ```
@@ -426,7 +435,6 @@ To switch back to MinIO, use the standard upstream Pipelines overlays shown belo
 
 TODO MinIO Will be removed in the next releases.
 
-
 ##### Pipeline Definitions Stored in the Database
 
 Install the [Multi-User Kubeflow Pipelines](https://www.kubeflow.org/docs/components/pipelines/multi-user/) official Kubeflow component:
@@ -434,6 +442,7 @@ Install the [Multi-User Kubeflow Pipelines](https://www.kubeflow.org/docs/compon
 ```sh
 kustomize build applications/pipeline/upstream/env/cert-manager/platform-agnostic-multi-user | kubectl apply -f -
 ```
+
 This installs Argo with the runasnonroot emissary executor. Please note that you are still responsible for analyzing the security issues that arise when containers are run with root access and for deciding if the Kubeflow pipeline main containers are run as runasnonroot. It is generally strongly recommended that all user-accessible OCI containers run with Pod Security Standards [restricted](https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted).
 
 ##### Pipeline Definitions Stored as Kubernetes Resources
@@ -566,7 +575,7 @@ kustomize build applications/trainer/upstream/overlays/kubeflow-platform | kubec
 Install the Spark Operator:
 
 ```sh
-kustomize build applications/spark/spark-operator/overlays/kubeflow | kubectl apply -f -
+kustomize build applications/spark/spark-operator/overlays/kubeflow | kubectl apply --server-side --force-conflicts -f -
 ```
 
 **Note:** The Ray component in the experimental folder is configured to disable Istio sidecar injection for its head and worker pods to ensure compatibility with Istio CNI.
@@ -610,9 +619,10 @@ After running the command, you can access the Kubeflow Central Dashboard by doin
 
 To connect to Kubeflow using NodePort / LoadBalancer / Ingress, you need to set up HTTPS. The reason is that many of our web applications (e.g., Tensorboard Web Application, Jupyter Web Application, Katib UI) use [Secure Cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies), so accessing Kubeflow with HTTP over a non-localhost domain does not work.
 
-Exposing your Kubeflow cluster with proper HTTPS is a straightforward process but depends on your environment. You can expose the `istio-ingressgateway` service in the `istio-system` namespace via nginx-ingress or any other ingress provider. For security reasons, only use `ClusterIP` on the service, not NodePort or something similarly dangerous. There is third-party [commercial support](https://www.kubeflow.org/docs/started/support/) available.
+Exposing your Kubeflow cluster with proper HTTPS is a straightforward process but depends on your environment. You can expose the `istio-ingressgateway` service in the `istio-system` namespace via nginx-ingress or any other ingress provider. For security reasons, only use `ClusterIP` on the service, not NodePort or something similarly dangerous. There is third-party [commercial support](
 
 ---
+
 **NOTE**
 
 If you absolutely need to expose Kubeflow over HTTP, you can disable the `Secure Cookies` feature by setting the `APP_SECURE_COOKIES` environment variable to `false` in every relevant web app. This is not recommended, as it poses security risks.
@@ -625,12 +635,13 @@ For security reasons, we don't want to use the default username and email for th
 
 1. Edit `common/dex/overlays/oauth2-proxy/config-map.yaml` and fill the relevant field with your email and preferred username:
 
-    ```yaml
-    ...
-      staticPasswords:
-      - email: <REPLACE_WITH_YOUR_EMAIL>
-        username: <REPLACE_WITH_PREFERRED_USERNAME>
-    ```
+   ```yaml
+
+   ---
+   staticPasswords:
+     - email: <REPLACE_WITH_YOUR_EMAIL>
+       username: <REPLACE_WITH_PREFERRED_USERNAME>
+   ```
 
 ### Change Default User Password
 
@@ -645,41 +656,43 @@ Pick a password for the default user, with email `user@example.com`, and hash it
     ```
 
 For example, running the above command locally with required packages like _passlib_ would look as follows:
-  ```sh
-  python3 -c 'from passlib.hash import bcrypt; import getpass; print(bcrypt.using(rounds=12, ident="2y").hash(getpass.getpass()))'
-  Password:       <--- Enter the password here
-  $2y$12$vIm8CANhuWui0J1p3jYeGeuM28Qcn76IFMaFWvZCG5ZkKZ4MjTF4u <--- GENERATED_HASH_FOR_ENTERED_PASSWORD
-  ```
+
+```sh
+python3 -c 'from passlib.hash import bcrypt; import getpass; print(bcrypt.using(rounds=12, ident="2y").hash(getpass.getpass()))'
+Password:       <--- Enter the password here
+$2y$12$vIm8CANhuWui0J1p3jYeGeuM28Qcn76IFMaFWvZCG5ZkKZ4MjTF4u <--- GENERATED_HASH_FOR_ENTERED_PASSWORD
+```
 
 #### Before Creating the Cluster:
 
 1. Edit `common/dex/base/dex-passwords.yaml` and fill the relevant field with the hash of the password you chose:
 
-    ```yaml
-    ...
-      stringData:
-        DEX_USER_PASSWORD: <REPLACE_WITH_HASH>
-    ```
+   ```yaml
+
+   ---
+   stringData:
+     DEX_USER_PASSWORD: <REPLACE_WITH_HASH>
+   ```
 
 #### After Creating the Cluster:
 
 1. Delete the existing secret _dex-passwords_ in the auth namespace using the following command:
 
-    ```sh
-    kubectl delete secret dex-passwords -n auth
-    ```
+   ```sh
+   kubectl delete secret dex-passwords -n auth
+   ```
 
 2. Create the secret dex-passwords with the new hash using the following command:
 
-    ```sh
-    kubectl create secret generic dex-passwords --from-literal=DEX_USER_PASSWORD='REPLACE_WITH_HASH' -n auth
-    ```
+   ```sh
+   kubectl create secret generic dex-passwords --from-literal=DEX_USER_PASSWORD='REPLACE_WITH_HASH' -n auth
+   ```
 
 3. Recreate the _dex_ pod in the auth namespace using the following command:
 
-    ```sh
-    kubectl delete pods --all -n auth
-    ```
+   ```sh
+   kubectl delete pods --all -n auth
+   ```
 
 4. Try to log in using the new Dex password.
 
@@ -753,7 +766,6 @@ pre-commit run
 
 ![Kubeflow Architecture](architecture.svg)
 
-
 ## Frequently Asked Questions
 
 - **Q:** What versions of Istio, Knative, Cert-Manager, Argo, ... are compatible with Kubeflow?
@@ -764,8 +776,3 @@ pre-commit run
   **A:** Istio CNI provides better security by eliminating the need for privileged init containers, making it more compatible with Pod Security Standards (PSS). It also enables native sidecars support introduced in Kubernetes 1.28, which helps address issues with init containers and application lifecycle management.
 - **Q:** Why does Istio CNI fail on Google Kubernetes Engine (GKE) with "read-only file system" errors?
   **A:** GKE mounts `/opt/cni/bin` as read-only for security reasons. Use the GKE-specific overlay: `kubectl apply -k common/istio/istio-install/overlays/gke` (or `overlays/ambient-gke` for ambient mode). These overlays use GKE's writable CNI directory at `/home/kubernetes/bin`. For details, see [Istio CNI Prerequisites](https://istio.io/latest/docs/setup/additional-setup/cni/#prerequisites).
-
-
-
-
-
